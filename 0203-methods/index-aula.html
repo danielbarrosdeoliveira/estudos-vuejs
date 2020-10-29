@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <p>Total: {{total}}</p>
+      <div>
+        <button @click="aumentar">Aumentar</button>
+        <button @click="diminuir">Diminuir</button>
+        <p>Instrumento: {{instrumento}}</p>
+        <button @click="mudarNome('Violão')">Violão</button>
+        <button @click="mudarNome('Guitarra')">Guitarra</button>
+      </div>
+    </div>
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          total: 0,
+          instrumento: "",
+        },
+        methods: {
+          aumentar() {
+            if (this.total === 10) {
+              alert("Valor máximo já alcançado!");
+            } else {
+              this.total++;
+              this.teste();
+            }
+          },
+          diminuir() {
+            if (this.total === 0) {
+              alert("Valor mínimo já alcançado");
+            } else {
+              this.total--;
+            }
+          },
+          mudarNome(instrumento) {
+            this.instrumento = instrumento;
+          },
+          verEvento(event) {
+            console.log(event);
+          },
+          teste() {
+            console.log("Método Ativado");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+  </head>
+  <body>
+    <div id="app">
+      <input
+        type="text"
+        name="quote"
+        id="quote"
+        placeholder="Código da ação NASDAQ"
+      />
+      <button @click="puxarAcoes">Puxar Preço</button>
+      <p>Latest Time: {{acoes.latestTime}}</p>
+      <p>Latest Price: {{acoes.latestPrice}}</p>
+      <p>Company Name: {{acoes.companyName}}</p>
+    </div>
+
+    <!--
+      Utilizando a API
+      https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_9cf2059cfc9d402e8cf260d8d3fed0f9
+      Não se esqueça de se cadastrar em: https://iexcloud.io/ para gerar o seu token:
+
+      Crie um método que faça o fetch da resposta acima
+      O método deve ser ativado ao clique no botão Ver Preço
+
+      Coloque a resposta json do fetch em uma data e
+      mostre o valor de lalestPrice, latestTime e o
+      companyName na interface.
+    -->
+
+    <script>
+      const quote = document.getElementById("quote");
+
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          quote: quote,
+          acoes: {},
+        },
+        methods: {
+          async puxarAcoes() {
+            const response = await fetch(
+              "https://cloud.iexapis.com/stable/stock/" +
+                this.quote +
+                "/quote?token=pk_9cf2059cfc9d402e8cf260d8d3fed0f9"
+            );
+            const result = await response.json();
+            this.acoes = result;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

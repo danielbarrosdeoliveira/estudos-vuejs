@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    body {
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+      font-size: 1rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0;
+      padding: 0;
+      font-weight: bold;
+    }
+
+    span {
+      color: blue;
+    }
+
+    div {
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+
+    <ul>
+      <li><a @click.prevent="puxarAcao" href="https://api.origamid.dev/stock/aapl/quote">Apple</a></li>
+      <li><a @click.prevent="puxarAcao" href="https://api.origamid.dev/stock/googl/quote">Google</a></li>
+      <li><a @click.prevent="puxarAcao" href="https://api.origamid.dev/stock/amzn/quote">Amazon</a></li>
+      <li><a @click.prevent="puxarAcao" href="https://api.origamid.dev/stock/ebay/quote">Ebay</a></li>
+      <li><a @click.prevent="puxarAcao" href="https://api.origamid.dev/stock/pypl/quote">Paypal</a></li>
+    </ul>
+
+    <div>
+      <p>Nome da Empresa: <span class="blue">{{acao.companyName}}</span></p>
+      <p>Valor de Mercado: <span class="blue">{{acao.marketCap}}</span></p>
+      <p>Valor da Ação: <span class="blue">{{acao.latestPrice}}</span></p>
+    </div>
+
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        acao: {},
+      },
+      methods: {
+        async puxarAcao(event) {
+          const URL = event.currentTarget.href;
+
+          const response = await fetch(URL);
+          const json = await response.json();
+
+          this.acao = json;
+        }
+
+      }
+    });
+  </script>
+
+  <!--
+    Utilizando API
+    https://api.origamid.dev/stock/aapl/quote
+  
+    Adicione um evento de clique a cada <a> do html
+    acima e previna o comportamento padrão.
+  
+    Faça o fetch dos dados do href ao click e mostre na
+    interface o companyName, latestPrice, marketCap
+  -->
+</body>
+
+</html>

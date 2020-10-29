@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="./vue.js"></script>
+    <title>Vue.js</title>
+
+    <style>
+      body {
+        padding: 0;
+        margin: 0;
+      }
+      .verde {
+        color: green;
+      }
+
+      .vermelho {
+        color: red;
+      }
+      div#app {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #ccc;
+        width: 100%;
+      }
+      button {
+        display: block;
+        margin: 2rem auto;
+        background: rgba(50, 150, 120, 0.6);
+        border-radius: 8px;
+        padding: 0.5rem 1rem;
+        font-weight: bold;
+        font-size: 1rem;
+        outline: none;
+        border: none;
+        transition: 300ms;
+      }
+      button:hover {
+        cursor: pointer;
+        background: rgba(50, 150, 120, 0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div>
+        <p>companyName: {{apple.companyName}}</p>
+        <p>
+          marketCap:
+          <span
+            :class="apple.marketCap > google.marketCap ? 'verde' : 'vermelho'"
+            >{{apple.marketCap}}</span
+          >
+        </p>
+      </div>
+      <div>
+        <p>companyName: {{google.companyName}}</p>
+        <p>
+          marketCap:
+          <span
+            :class="google.marketCap> apple.marketCap ? 'verde' : 'vermelho'"
+            >{{google.marketCap}}</span
+          >
+        </p>
+      </div>
+      <div>
+        <button @click="puxarDados">Puxar Dados</button>
+      </div>
+    </div>
+    <!--
+  Utilizando as API's
+  https://api.iextrading.com/1.0/stock/aapl/quote
+  https://api.iextrading.com/1.0/stock/googl/quote
+
+  - Compare o marketCap (valor de
+  mercado) entre ambas.
+
+  - Mostre o nome das empresas e o valor
+  na interface (companyName e marketCap).
+
+  - Mude a cor para verde o nome da empresa com
+  maior marketCap e vermelho a com menor.
+-->
+
+    <script>
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          cor: "",
+          apple: "",
+          google: "",
+        },
+        methods: {
+          fetchGoogle() {
+            fetch(
+              "https://cloud.iexapis.com/stable/stock/googl/quote?token=pk_9cf2059cfc9d402e8cf260d8d3fed0f9"
+            )
+              .then((response) => response.json())
+              .then((google) => {
+                this.google = google;
+              });
+          },
+          fetchApple() {
+            fetch(
+              "https://cloud.iexapis.com/stable/stock/aapl/quote?token=pk_9cf2059cfc9d402e8cf260d8d3fed0f9"
+            )
+              .then((response) => response.json())
+              .then((apple) => {
+                this.apple = apple;
+              });
+          },
+          puxarDados() {
+            this.fetchApple();
+            this.fetchGoogle();
+          },
+        },
+      });
+    </script>
+  </body>
+</html>

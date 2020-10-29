@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p {
+      margin: 0;
+      padding: 0;
+    }
+
+    div {
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div>
+      <h3>Abra o console para ver o resultado</h3>
+      <button @click="handleClick">Clique</button>
+    </div>
+    <div>
+      <button @click="contador++">Aumentar</button>
+      <button @click="contador--">Diminuir</button>
+      {{contador}}
+    </div>
+    <div>
+      <button @click="ativo = !ativo">Ativar/Desativar</button>
+      Está ativo? {{ativo}}
+    </div>
+    <div>
+      <a href="#interno" @click.prevent="handleClick">Interno</a>
+    </div>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        contador: 0,
+        ativo: true
+      },
+      methods: {
+        handleClick(event) {
+          console.log(event);
+        }
+      }
+    })
+  </script>
+</body>
+
+</html>

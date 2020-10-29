@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+</head>
+<body>
+
+  <div id="app">
+    <header>
+      <h1>{{titulo}}</h1>
+    </header>
+    <main v-if="comprou" :style="{background: cor}">
+      <p>{{conteudo}}</p>
+      <p> numero + numero = {{3 + 3}}</p>
+      <p>{{comprou ? 'Sim ele comprou' : 'Não comprou'}}</p>
+      <input v-model="cor" type="color">
+      {{cor}}
+      <a :href="comprou ? href : ''">{{href}}</a>
+    </main>
+
+    <div v-show="exibir">
+      <p>O número informado foi: {{numero}}</p>
+    </div>
+  </div>
+  
+  <script>
+    const numero = prompt('Digite um número.');
+
+    new Vue({
+      el: "#app",
+      data: {
+        titulo: "Curso de Javascript",
+        conteudo: "Esse é o conteúdo",
+        lado: 5,
+        comprou: true,
+        href: "https://google.com.br",
+        cor: "#ccc",
+        exibir: true,
+        background: "#333",
+        numero: numero,
+      }
+    });
+
+  </script>
+</body>
+</html>
