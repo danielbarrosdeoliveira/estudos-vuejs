@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+      display: flex;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container">
+
+    <ul>
+      <li v-for="item in lista">{{item}}</li>
+    </ul>
+    <button @click="removerItem">Remover</button>
+    <button @click="mudarItem">Mudar</button>
+    <!-- <ul>
+      <h3>Frutas</h3>
+      <li v-for="(fruta, index) in frutas">
+        {{index}} {{fruta}}
+      </li>
+    </ul> -->
+
+    <!-- 
+    <ul>
+      <h3>Estados</h3>
+      <li v-for="(estado, key) in estados">
+        Estado: {{estado.nome}}
+        <p>População: {{estado.populacao}}</p>
+      </li>
+    </ul> -->
+
+    <!-- <ul>
+      <h3>Estados</h3>
+      <li v-for="({nome, populacao}, key) in estados" :key="key">
+        Estado: {{nome}}
+        <p>População: {{populacao}}</p>
+      </li>
+    </ul>
+
+    <div v-for="n in 10">{{n}}</div> -->
+
+
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        lista: ["Item 1", "Item 2", "Item 3"]
+      },
+      methods: {
+        removerItem() {
+          this.lista.pop(); // Ativa reatividade
+        },
+        mudarItem() {
+          this.$set(this.lista, 0, "Banana") // Ativa reatividade
+          // this.lista[0] = "Banana"; // Não ativa reatividade
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

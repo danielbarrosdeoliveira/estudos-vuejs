@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+    }
+
+    button {
+      background: #ccc;
+      outline: none;
+      border: none;
+      width: 5rem;
+      height: 1.5rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .logado {
+      color: green;
+      margin: 1rem 0;
+    }
+
+    .deslogado {
+      color: red;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <div v-if="logado">
+      <p class="logado">Usuário Logado</p>
+    </div>
+    <div v-else="logado">
+      <p class="deslogado">Usuário Logado</p>
+    </div>
+    <button @click="logado = !logado">{{logado ? `Deslogar` : `Logar` }}</button>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        logado: true,
+      },
+    });
+  </script>
+
+</body>
+
+</html>

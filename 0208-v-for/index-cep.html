@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+      display: flex;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app" class="container">
+    <button @click="puxarCEP">Buscar</button>
+    <ul>
+      <p v-for="dado, key in local">
+        {{key}}: {{dado}}
+      </p>
+    </ul>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        local: {}
+      },
+      methods: {
+        puxarCEP() {
+          fetch('https://viacep.com.br/ws/04538133/json/')
+            .then(response => response.json())
+            .then(json => {
+              this.local = json
+            });
+
+        },
+      }
+    });
+  </script>
+
+  <!--
+  Utilizando a api:
+  https://viacep.com.br/ws/04538133/json/
+  Mostre o cep, logradouro, complemento, bairro, localidade e uf do que for retornado.
+
+  
+  Use o arquivo json da aula, para listar os cursos e as matérias.
+  -->
+
+
+</body>
+
+</html>
