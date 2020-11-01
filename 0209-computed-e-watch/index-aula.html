@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    body {
+      font-family: 'Nunito';
+      min-height: 100vh;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <!-- <h1>{{preco - desconto}}</h1>
+    <p>{{total}}</p> -->
+    <ul>
+      <li v-for="carro in carrosAzuis">
+        {{carro.marca}}
+      </li>
+      <button @click="removerCarro">Remover</button>
+
+      <p>{{contador}}</p>
+      <button @click="contador++">Adicionar</button>
+    </ul>
+  </div>
+
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        preco: 59,
+        desconto: 10,
+        contador: 0,
+        carros: [
+          {
+            marca: "VW",
+            cor: "Azul"
+          },
+          {
+            marca: "Ford",
+            cor: "Preto"
+          },
+          {
+            marca: "Tesla",
+            cor: "Azul"
+          }
+        ]
+      },
+      computed: {
+        total() {
+          return "R$ " + (this.preco - this.desconto);
+        },
+        carrosAzuis() {
+          return this.carros.filter(({ cor }) => cor === "Azul")
+        }
+      },
+      methods: {
+        removerCarro() {
+          this.carros.pop();
+        }
+      },
+      watch: {
+        contador() {
+          console.log(this.contador);
+          this.removerCarro();
+        },
+        carros(valorNovo, valorAntigo) {
+          console.log(valorNovo)
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>

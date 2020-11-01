@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    body {
+      font-family: 'Nunito';
+      min-height: 100vh;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" placeholder="Digite o CEP" maxlength="8" v-model="cep">
+    <h1>{{cep}}</h1>
+    <ul>
+      <li v-for="(valor, chave) in endereco"><span
+          style="font-weight: bold; text-transform: uppercase;">{{chave}}:</span> {{valor}}</li>
+    </ul>
+  </div>
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        cep: "",
+        endereco: {},
+      },
+      watch: {
+        cep(valor) {
+          if (valor.length === 8) {
+            fetch(`https://viacep.com.br/ws/${valor}/json/`)
+              .then(r => r.json())
+              .then(r => {
+                this.endereco = r;
+              })
+          }
+        }
+      }
+    });
+  </script>
+
+</body>
+
+</html>
