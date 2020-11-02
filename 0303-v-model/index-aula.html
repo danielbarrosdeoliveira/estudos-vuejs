@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <input v-model.lazy="nome" placeholder="Nome Completo">
+    <br>
+    <input :value="email" placeholder="E-mail">
+    <br>
+    <input type="text" v-model.number="ano">{{ano}}
+
+    <input id="receberEmail" name="receberEmail" type="checkbox" v-model="receberEmail">
+    <label for="receberEmail">Receber E-mail</label>
+
+
+    <p>{{receberEmail}}</p>
+    <p>nome: {{nome}}</p>
+    <p>email: {{email}}</p>
+
+    <div>
+      <input type="radio" name="azul" id="azul" v-model="cor" value="Azul">
+      <label for="azul">Azul</label>
+
+      <input type="radio" name="vermelho" id="vermelho" v-model="cor" value="Vermelho">
+      <label for="vermelho">Vermelho</label>
+
+      <input type="radio" name="verde" id="verde" v-model="cor" value="Verde">
+      <label for="verde">Verde</label>
+      <br>
+      <p>{{cor}}</p>
+    </div>
+
+    <div>
+      <select name="" id="">
+        <option value="" disabled>Selecione uma fruta...</option>
+        <option value="banana">Banana</option>
+        <option value="morango">Morango</option>
+        <option value="uva">Uva</option>
+        <p>{{fruta}}</p>
+      </select>
+    </div>
+  </div>
+
+
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        nome: '',
+        email: 'danielbarrosdeoliveira@outlok.com',
+        receberEmail: '',
+        cor: '',
+        fruta: '',
+        ano: 0
+      }
+    },
+    );
+  </script>
+
+  <style>
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      font-family: monospace;
+      list-style: none;
+      padding: 0px;
+      margin: 0px;
+    }
+
+    .column {
+      flex-direction: column;
+    }
+
+    li {
+      padding: 20px;
+      background: #84e;
+      color: white;
+      border-radius: 4px;
+      margin: 10px;
+      flex: 1;
+      text-align: center;
+    }
+  </style>
+
+</body>
+
+</html>

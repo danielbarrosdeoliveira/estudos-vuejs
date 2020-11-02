@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="./vue.js"></script>
+  <title>Vue.js</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      font-size: 1.125rem;
+      margin-top: 1rem;
+      display: flex;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <form action="">
+      <label for="name">Nome Completo *</label>
+      <br>
+      <input id="name" name="name" type="text" v-model="name" required>
+      <br>
+      <label for="email">E-mail *</label>
+      <br>
+      <input id="email" name="email" type="email" v-model="email" required>
+      <br>
+      <label for="telefone">Telefone *</label>
+      <br>
+      <input id="telefone" name="telefone" type="tel" v-model="tel" required>
+      <br>
+      <label for="name">Mensagem</label>
+      <br>
+      <textarea id="message" name="message" rows="5" v-model="message"></textarea>
+      <br>
+
+      <input type="submit" value="Enviar" @click.prevent="send">
+    </form>
+
+    <p>Mensagem: {{sendMessage}}</p>
+  </div>
+
+
+  <script>
+    const vm = new Vue({
+      el: '#app',
+      data: {
+        name: '',
+        email: '',
+        tel: '',
+        message: '',
+        sendMessage: ''
+      },
+      methods: {
+        send() {
+          // if (this.email.length === 0 || this.name.length === 0 || this.tel.length === 0) {
+          //   alert('Favor preencher os campos obrigatórios');
+          // } else {
+          this.sendMessage = `
+            Nome Completo: ${this.name},
+            Email: ${this.email},
+            Telefone: ${this.tel},
+            Mensagem: ${this.message}`
+        }
+
+        // }
+      }
+    },
+    );
+  </script>
+
+  <style>
+    input,
+    label,
+    textarea {
+      margin: 0.5rem;
+    }
+
+    button {
+      background: turquoise;
+      font-size: 1.2rem;
+      outline: none;
+      border: none;
+      border-radius: 8px;
+      width: 120px;
+      height: 40px;
+      color: whitesmoke;
+      transition: 300ms;
+      margin: 0.5rem;
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: tomato;
+    }
+  </style>
+
+</body>
+
+</html>
